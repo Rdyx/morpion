@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #aaa;
+}
+.caseGo{
+    height: 75px;
+    width: 75px;
+    border: 1px solid black;
+}
+
+.caseGo img{
+    width: 100%;
+    height: 100%;
+}
