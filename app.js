@@ -8,7 +8,7 @@ var scoreP2 = 0;
 //On boucle tant que l'utilisateur n'a pas entré un chiffre
 function nombreParties(x) {
     for (g = 0; g < 1;) {
-        if (isNaN(nbParties)) {
+        if (isNaN(nbParties) || nbParties == null) {
             nbParties = prompt("Il faut mettre un chiffre ! Combien de parties souhaitez-vous jouer ?")
         } else {
             g++
