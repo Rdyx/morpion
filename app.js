@@ -182,6 +182,8 @@ $(".caseGo").on("click", function () {
             alert(player1 + " gagne la partie avec un score de " + scoreP1 + " ! Vous reprendrez bien un p'tit coup ?");
             scoreP1 = 0;
             scoreP2 = 0;
+            nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
             //Si joueur 2 a un meilleur score
         } else if (scoreP1 < scoreP2) {
             $(".caseGo").html("");
@@ -190,6 +192,8 @@ $(".caseGo").on("click", function () {
             alert(player2 + " gagne la partie avec un score de " + scoreP2 + " ! Un p'tit whisky pour fêter ça ?");
             scoreP1 = 0;
             scoreP2 = 0;
+            nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
             //Si joueur 1 et joueur 2 on le même score
         } else if (scoreP1 == scoreP2) {
             $(".caseGo").html("");
@@ -198,6 +202,8 @@ $(".caseGo").on("click", function () {
             alert("Demn ! " + player1 + " et " + player2 + " n'ont pas réussi à être départagés ! Allez, cul sec pour chacun !");
             scoreP1 = 0;
             scoreP2 = 0;
+            nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
         }
     }
 })
