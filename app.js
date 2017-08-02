@@ -9,7 +9,7 @@ var scoreP2 = 0;
 function nombreParties(x) {
     for (g = 0; g < 1;) {
         if (isNaN(nbParties)) {
-            nbParties = prompt("Il faut mettre un chiffre !<br> Combien de parties souhaitez-vous jouer ?")
+            nbParties = prompt("Il faut mettre un chiffre ! Combien de parties souhaitez-vous jouer ?")
         } else {
             g++
             return nbParties;
