@@ -6,7 +6,7 @@ var scoreP1 = 0;
 var scoreP2 = 0;
 
 //On boucle tant que l'utilisateur n'a pas entré un chiffre
-function nombreParties(x) {
+function parties(x) {
     for (g = 0; g < 1;) {
         if (isNaN(nbParties) || nbParties == false) {
             nbParties = prompt("Il faut mettre un chiffre ! Combien de parties souhaitez-vous jouer ?")
@@ -15,9 +15,9 @@ function nombreParties(x) {
             return nbParties;
         }
     }
-}
-nombreParties(nbParties);
+};
 
+parties(nbParties);
 //On met le nom du joueur qui commence
 $("#player").html(player1);
 //On affiche les noms et les scores
@@ -162,7 +162,6 @@ $(".caseGo").on("click", function () {
             h++
             i = 0;
         } else if (i > 8) {
-            console.log("bah alors")
             alert("Egalité ! On recommence !")
             $(".caseGo").html("");
             h++
@@ -183,6 +182,8 @@ $(".caseGo").on("click", function () {
             scoreP1 = 0;
             scoreP2 = 0;
             nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+            //On relance la function pour être sûrs d'avoir un chiffre
+            parties(nbParties);
             $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
             //Si joueur 2 a un meilleur score
         } else if (scoreP1 < scoreP2) {
@@ -193,6 +194,8 @@ $(".caseGo").on("click", function () {
             scoreP1 = 0;
             scoreP2 = 0;
             nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+            //On relance la function pour être sûrs d'avoir un chiffre
+            parties(nbParties);
             $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
             //Si joueur 1 et joueur 2 on le même score
         } else if (scoreP1 == scoreP2) {
@@ -203,6 +206,8 @@ $(".caseGo").on("click", function () {
             scoreP1 = 0;
             scoreP2 = 0;
             nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+            //On relance la function pour être sûrs d'avoir un chiffre
+            parties(nbParties);
             $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
         }
     }
@@ -228,14 +233,10 @@ $("#resetGame2").on("click", function () {
     scoreP2 = 0;
     player1 = prompt("Nom du joueur 1");
     player2 = prompt("Nom du joueur2");
-    nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-    $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
     alert("Bah alors ? On s'enjaille !");
+    nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+    //On relance la function pour être sûrs d'avoir un chiffre
+    parties(nbParties);
+    $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
 
 })
-
-// var player1 = prompt("Nom du joueur 1");
-// var player2 = prompt("Nom du joueur2");
-// var nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-// // var scoreP1 = 0;
-// // var scoreP2 = 0;
