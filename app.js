@@ -81,12 +81,9 @@ function verif(a, b, c) {
         }
         //Reset des cases
         $(".caseGo").html("");
-        //Reset compteur de parties
-        h = 0;
+        //reset le compteur de parties, compteur de coups et scores
+        h = i = scoreP1 = scoreP2 = 0;;
         //Reset du compteur de coups
-        i = 0;
-        //Reset des scores
-        scoreP1 = scoreP2 = 0;
         $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
     }
 
