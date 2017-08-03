@@ -13,9 +13,7 @@ function parties() {
     while (true) {
         if (isNaN(nbParties) || nbParties == false) {
             nbParties = prompt("Il faut mettre un chiffre ! Combien de parties souhaitez-vous jouer ?")
-        } else {
-            return false;
-        }
+        };
     }
 };
 //On call la fonction
