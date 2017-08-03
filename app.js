@@ -1,7 +1,7 @@
 //On initialise le nom des joueuers ainsi que le nombre de parties qu'on veut jouer et le score
 var player1 = prompt("Nom du joueur 1");
 var player2 = prompt("Nom du joueur2");
-var nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
+var nbParties = prompt("Combien de parties souhaitez-vous jouer ? (Laissez vide pour jouer indéfiniment)");
 var scoreP1 = 0;
 var scoreP2 = 0;
 //On défini ce qui va apparaître dans les cases
@@ -10,10 +10,8 @@ var play2 = '<img src="http://odellya.com/wp-content/uploads/2015/03/SEO-29.png"
 
 //On fait une fonction qui boucle tant que l'utilisateur n'a pas entré un chiffre dans nbParties
 function parties() {
-    while (true) {
-        if (isNaN(nbParties) || nbParties == false) {
-            nbParties = prompt("Il faut mettre un chiffre ! Combien de parties souhaitez-vous jouer ?")
-        };
+    while (isNaN(nbParties) || !nbParties) {
+        nbParties = Infinity;
     }
 };
 //On call la fonction
