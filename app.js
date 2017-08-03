@@ -33,7 +33,7 @@ var h = 0;
 
 //Conditions de victoire
 function verif(a, b, c) {
-    //Tant qu'on a pas atteind le nombre de parties demandé, on vérifie les conditions de victoire
+    //Tant qu'on a pas atteint le nombre de parties demandé, on vérifie les conditions de victoire
     if (h < nbParties) {
         //Si a == b et que a == c alors b == c
         if (a == b && a == c) {
@@ -58,7 +58,7 @@ function verif(a, b, c) {
                 $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
             }
         }
-    } //Si on atteind le nombre de parties demandées
+    } //Si on atteint le nombre de parties demandées
     else if (h == nbParties) {
         //Si joueur 1 a un meilleur score
         if (scoreP1 > scoreP2) {
