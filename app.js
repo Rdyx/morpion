@@ -4,20 +4,18 @@ var player2 = prompt("Nom du joueur2");
 var nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
 var scoreP1 = 0;
 var scoreP2 = 0;
-
 //On boucle tant que l'utilisateur n'a pas entré un chiffre
-function parties(x) {
-    for (g = 0; g < 1;) {
+function parties() {
+    while (true) {
         if (isNaN(nbParties) || nbParties == false) {
             nbParties = prompt("Il faut mettre un chiffre ! Combien de parties souhaitez-vous jouer ?")
         } else {
-            g++
-            return nbParties;
+            return false;
         }
     }
 };
-
 parties(nbParties);
+
 //On met le nom du joueur qui commence
 $("#player").html(player1);
 //On affiche les noms et les scores
@@ -27,152 +25,31 @@ $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
 var play1 = '<img src="http://www.i2symbol.com/images/myspace/symbols/heavy_multiplication_x_u2716_icon_256x256.png" alt="x">';
 var play2 = '<img src="http://odellya.com/wp-content/uploads/2015/03/SEO-29.png" alt="o">';
 
-//On initialise "i" en dehors de la fonction car sinon il sera remis à 0 à chaque clic
-i = 0;
-//Et on incrémente "i" à chaque clique dans une case en se servant du modulo pour savoir qui doit jouer (tour pair/impair)
-$(".caseGo").on("click", function () {
-    //On défini si la case est vide si X ou O va être ajouté
-    if ($(this).html() == "") {
-        if (i % 2 === 0) {
-            $("#player").html(player1);
-            $(this).html(play1);
-        } else {
-            $("#player").html(player2);
-            $(this).html(play2);
-        };
-        return i++
-    }
-})
-
-
 //On initialise une sorte de boucle avec un var = 0 qui sera incrémentée pour calculer et s'arrêter une fois le nb de parties atteint
 var h = 0;
-$(".caseGo").on("click", function () {
+//Et on incrémente "i" à chaque clique dans une case en se servant du modulo pour savoir qui doit jouer (tour pair/impair)
+
+
+function verif(a, b, c) {
     if (h < nbParties) {
         //combinaisons gagnantes (heureusement que c'est un morpion...)
         //combinaison top
-        if ($("#00").html() === play1 && $("#01").html() === play1 && $("#02").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#00").html() === play2 && $("#01").html() === play2 && $("#02").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
+        if (a == b && a == c) {
+            if (a == play1) {
+                i = 0;
+                h++
+                $(".caseGo").html("");
+                $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+                alert(player1 + " gagne !")
+            } else if (a == play2) {
+                i = 0;
+                h++
+                alert(player2 + " gagne !");
+                $(".caseGo").html("");
+                $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
+            }
         }
-        //combinaison gauche
-        else if ($("#00").html() === play1 && $("#10").html() === play1 && $("#20").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#00").html() === play2 && $("#10").html() === play2 && $("#20").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        }
-        //combinaison droite
-        else if ($("#02").html() === play1 && $("#12").html() === play1 && $("#22").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#02").html() === play2 && $("#12").html() === play2 && $("#22").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        } //combinaison bottom
-        else if ($("#20").html() === play1 && $("#21").html() === play1 && $("#22").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#20").html() === play2 && $("#21").html() === play2 && $("#22").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        }
-        //combinaisons de la case centrale (4 directions)
-        //top-left > bottom-right
-        else if ($("#00").html() === play1 && $("#11").html() === play1 && $("#22").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#00").html() === play2 && $("#11").html() === play2 && $("#22").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        }
-        //top-mid > bottom-mid
-        else if ($("#01").html() === play1 && $("#11").html() === play1 && $("#21").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#01").html() === play2 && $("#11").html() === play2 && $("#21").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        }
-        //top-right > bottom-left
-        else if ($("#02").html() === play1 && $("#11").html() === play1 && $("#20").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#02").html() === play2 && $("#11").html() === play2 && $("#20").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        }
-        //left-mid > right-mid
-        else if ($("#10").html() === play1 && $("#11").html() === play1 && $("#12").html() === play1) {
-            alert(player1 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            h++
-            i = 0;
-        } else if ($("#10").html() === play2 && $("#11").html() === play2 && $("#12").html() === play2) {
-            alert(player2 + " gagne !");
-            $(".caseGo").html("");
-            $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
-            h++
-            i = 0;
-        } else if (i > 8) {
-            alert("Egalité ! On recommence !")
-            $(".caseGo").html("");
-            h++
-            i = 0;
-        }
-    };
-})
-
-//On vérifie le nombre de partie jouée à chaque click, ok la mémoire va pas kiffer si je fais ce genre de truc souvent...
-$(".caseGo").on("click", function () {
-    if (h == nbParties) {
+    } else if (h == nbParties) {
         //Si joueur 1 a un meilleur score
         if (scoreP1 > scoreP2) {
             $(".caseGo").html("");
@@ -182,10 +59,9 @@ $(".caseGo").on("click", function () {
             scoreP1 = 0;
             scoreP2 = 0;
             nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-            //On relance la function pour être sûrs d'avoir un chiffre
+            //On relance la function pour être sûr d'avoir un chiffre
             parties(nbParties);
             $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-            //Si joueur 2 a un meilleur score
         } else if (scoreP1 < scoreP2) {
             $(".caseGo").html("");
             h = 0
@@ -211,7 +87,43 @@ $(".caseGo").on("click", function () {
             $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
         }
     }
-})
+};
+
+//On initialise "i" en dehors de la fonction car sinon il sera remis à 0 à chaque clic
+var i = 0;
+$(".caseGo").on("click", function () {
+    //On défini si la case est vide si X ou O va être ajouté
+    if ($(this).html() == "") {
+        if (i % 2 === 0) {
+            $("#player").html(player1);
+            $(this).html(play1);
+        } else {
+            $("#player").html(player2);
+            $(this).html(play2);
+        };
+        console.log(i)
+        return i++
+    }
+});
+//On vérifie les possibilités à chaque clic et on les retourne dans la fonction qui va déterminer si une correspond à une condition de win
+$(".caseGo").on("click", function () {
+    //top
+    return verif($("#00").html(), $("#01").html(), $("#02").html())
+        //right
+        || verif($("#02").html(), $("#12").html(), $("#22").html())
+        //bottom
+        || verif($("#20").html(), $("#21").html(), $("#22").html())
+        //left
+        || verif($("#00").html(), $("#10").html(), $("#20").html())
+        //top-left > bottom-right
+        || verif($("#00").html(), $("#11").html(), $("#22").html())
+        //top-mid > bottom-mid
+        || verif($("#01").html(), $("#11").html(), $("#12").html())
+        //top-right > bottom-left
+        || verif($("#02").html(), $("#11").html(), $("#20").html())
+        //mid-left > mid-right
+        || verif($("#10").html(), $("#11").html(), $("#12").html());
+});
 
 //Un bouton reset useless pour les feignants 
 $("#resetGame").on("click", function () {
