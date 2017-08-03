@@ -24,8 +24,8 @@ $("#player").html(player1);
 $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
 
 //On défini ce qui va apparaître dans les cases
-var play1 = "x" //<img src='http://www.i2symbol.com/images/myspace/symbols/heavy_multiplication_x_u2716_icon_256x256.png'/>";
-var play2 = "o" //<img src='http://odellya.com/wp-content/uploads/2015/03/SEO-29.png' alt='o'/>";
+var play1 = '<img src="http://www.i2symbol.com/images/myspace/symbols/heavy_multiplication_x_u2716_icon_256x256.png" alt="x">';
+var play2 = '<img src="http://odellya.com/wp-content/uploads/2015/03/SEO-29.png" alt="o">';
 
 //On initialise "i" en dehors de la fonction car sinon il sera remis à 0 à chaque clic
 i = 0;
