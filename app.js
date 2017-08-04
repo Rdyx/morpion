@@ -3,7 +3,7 @@ $(window).on('load', function () {
     $('#myModal').modal('show');
 });
 
-//On initialise le nom des joueuers ainsi que le nombre de parties qu'on veut jouer et le score en cliquant sur #saveInfos
+//On initialise le nom des joueurs ainsi que le nombre de parties qu'on veut jouer et le score en cliquant sur #saveInfos
 var player1 = "";
 var player2 = "";
 var nbParties = 0;
@@ -17,7 +17,7 @@ var play2 = '<img src="o.png" alt="o">';
 
 //On fait une fonction qui boucle tant que l'utilisateur n'a pas entré un chiffre dans nbParties
 function parties() {
-    while (isNaN(nbParties) || !nbParties || nbParties < 0) {
+    while (isNaN(nbParties) || !nbParties ||  nbParties < 0) {
         nbParties = Infinity;
     }
 };
@@ -39,8 +39,6 @@ function verif(a, b, c) {
                 $('#modalWin').modal('show');
                 //On reset le nombre de coups
                 i = 0;
-                //On accorde l'affichage du nom du joueur avec le compteur de coups
-                $("#player").html("A " + player1 + " de jouer !");
                 //On incrément le nombre de parties jouées
                 h++
                 //On met à jour les scores
@@ -55,13 +53,20 @@ function verif(a, b, c) {
             else if (a == play2) {
                 $('#modalWin').modal('show');
                 i = 0;
-                $("#player").html("A " + player1 + " de jouer !");
                 h++
                 $("#scores").html("(" + scoreP1 + ") " + player1 + " - " + player2 + " (" + ++scoreP2 + ")");
                 $("#winner").html(player2 + " a gagné la manche ! Félicitations !");
                 $("#contOrReset").html("Continuer");
                 $("#player").html("Bravo !<br> A " + player1 + " de jouer !");
             }
+        } //Si le tableau est plein (donc 9 coups joués) et que personne n'a gagné
+        else if (i === 9) {
+            $('#modalWin').modal('show');
+            h++
+            i = 0;
+            $("#player").html("Dommage !<br> A " + player1 + " de jouer !");
+            $("#winner").html("Personne n'a gagné ! <br> Egalité !");
+            $("#contOrReset").html("Continuer");
         }
     } //Si on atteint le nombre de parties demandées
     else if (h == nbParties) {
@@ -167,6 +172,6 @@ $("#resetGame2").on("click", function () {
     $('#myModal').modal('show');
 })
 
-$("#contOrReset").on("click", function (){
+$("#contOrReset").on("click", function () {
     $(".caseGo").html("");
 })
