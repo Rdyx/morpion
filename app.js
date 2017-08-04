@@ -17,7 +17,7 @@ var play2 = '<img src="o.png" alt="o">';
 
 //On fait une fonction qui boucle tant que l'utilisateur n'a pas entré un chiffre dans nbParties
 function parties() {
-    while (isNaN(nbParties) || !nbParties) {
+    while (isNaN(nbParties) || !nbParties || nbParties < 0) {
         nbParties = Infinity;
     }
 };
