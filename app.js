@@ -12,8 +12,8 @@ var nbParties = 0;
 var scoreP1 = 0;
 var scoreP2 = 0;
 //On défini ce qui va apparaître dans les cases
-var play1 = '<img src="http://www.i2symbol.com/images/myspace/symbols/heavy_multiplication_x_u2716_icon_256x256.png" alt="x">';
-var play2 = '<img src="http://odellya.com/wp-content/uploads/2015/03/SEO-29.png" alt="o">';
+var play1 = '<img src="x.png" alt="x">';
+var play2 = '<img src="o.png" alt="o">';
 
 //On fait une fonction qui boucle tant que l'utilisateur n'a pas entré un chiffre dans nbParties
 function parties() {
@@ -23,12 +23,6 @@ function parties() {
 };
 //On call la fonction
 parties();
-
-
-//On affiche les noms et les scores
-// $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-
-
 
 //On initialise une sorte de boucle avec un var = 0 qui sera incrémentée pour calculer et s'arrêter une fois le nb de parties atteint
 var h = 0;
@@ -45,12 +39,14 @@ function verif(a, b, c) {
                 $('#modalWin').modal('show');
                 //On reset le nombre de coups
                 i = 0;
+                //On accorde l'affichage du nom du joueur avec le compteur de coups
+                $("#player").html("A " + player1 + " de jouer !");
                 //On incrément le nombre de parties jouées
                 h++
                 //On reset les cases
                 $(".caseGo").html("");
                 //On met à jour les scores
-                $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+                $("#scores").html("(" + ++scoreP1 + ") " + player1 + " - " + player2 + " (" + scoreP2 + ")");
                 //On annonce le vainqueur
                 $("#winner").html(player1 + " a gagné la manche ! Félicitations !");
                 //On affiche le texte du bouton #contOrReset
@@ -59,9 +55,10 @@ function verif(a, b, c) {
             else if (a == play2) {
                 $('#modalWin').modal('show');
                 i = 0;
+                $("#player").html("A " + player1 + " de jouer !");
                 h++
                 $(".caseGo").html("");
-                $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
+                $("#scores").html("(" + scoreP1 + ") " + player1 + " - " + player2 + " (" + ++scoreP2 + ")");
                 $("#winner").html(player2 + " a gagné la manche ! Félicitations !");
                 $("#contOrReset").html("Continuer");
             }
@@ -81,6 +78,8 @@ function verif(a, b, c) {
         else if (scoreP1 == scoreP2) {
             $("#winner").append('<p>Demn ! ' + player1 + ' et ' + player2 + ' n\'ont pas réussi à être départagés !<br> Allez, cul sec pour chacun !</p>');
         }
+        //On accorde l'affichage du nom du joueur avec le compteur de coups
+        $("#player").html("A " + player1 + " de jouer !");
         //On change le texte du bouton
         $("#contOrReset").html("Rejouer");
         //Reset des cases
@@ -88,27 +87,25 @@ function verif(a, b, c) {
         //reset le compteur de parties, compteur de coups et scores
         h = i = scoreP1 = scoreP2 = 0;;
         //Reset du compteur de coups
-        $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+        $("#scores").html("(" + scoreP1 + ") " + player1 + " - " + player2 + " (" + scoreP2 + ")");
     }
-
 };
 
 //On initialise "i" en dehors de la fonction car sinon il sera remis à 0 à chaque clic
 var i = 0;
 //Et on incrémente "i" à chaque clique dans une case en se servant du modulo pour savoir qui doit jouer (tour pair/impair)
 $(".caseGo").on("click", function () {
-    console.log(player1 + player2 + nbParties)
     //On défini si la case est vide et si player1 ou player2 va jouer
-    if ($(this).html() == "") {
+    if (!$(this).html()) {
         //Si i est un chiffre pair, alors player1 joue
         if (i % 2 === 0) {
             //On affiche le pseudo du joueur
-            $("#player").html(player1);
+            $("#player").html("A " + player1 + " de jouer !");
             //On injecte la valeur de play1 dans la case (de classe .caseGo)
             $(this).html(play1);
         } //Si i est un chiffre impair, alors player2 joue
         else {
-            $("#player").html(player2);
+            $("#player").html("A " + player2 + " de jouer !");
             $(this).html(play2);
         };
         //On incrément le nombre de coups à chaque clique sur une case
@@ -142,22 +139,26 @@ $("#saveInfos").on("click", function () {
     player1 = $("#player_1").val();
     player2 = $("#player_2").val();
     nbParties = parseInt($(".nbParties").val());
+    //On accorde l'affichage du nom du joueur avec le compteur de coups (après l'avoir défini avec la var associée)
+    $("#player").html("A " + player1 + " de jouer !");
     //On reset compteurs et scores
     h = i = scoreP1 = scoreP2 = 0;
     //On lance la fonction partie() au cas où l'utilisateur n'entre rien/du texte pour faire un nb Infinity de parties
     parties();
     //Premier affichage des scores + noms des joueurs
-    $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+    $("#scores").html("(" + scoreP1 + ") " + player1 + " - " + player2 + " (" + scoreP2 + ")");
 });
 
 //Un bouton reset useless pour les feignants 
 $("#resetGame").on("click", function () {
+    //On accorde l'affichage du nom du joueur avec le compteur de coups
+    $("#player").html("A " + player1 + " de jouer !");
     //reset l'intérieur des cases
     $(".caseGo").html("");
     //reset le compteur de parties, compteur de coups et scores
     h = i = scoreP1 = scoreP2 = 0;
     //reset affichage des scores
-    $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+    $("#scores").html("(" + scoreP1 + ") " + player1 + " - " + player2 + " (" + scoreP2 + ")");
 })
 
 //Un bouton reset pour réinitialiser toutes les données de la partie (équivalent à un reload mais sans recharger la page)
