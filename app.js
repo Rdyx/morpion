@@ -43,24 +43,24 @@ function verif(a, b, c) {
                 $("#player").html("A " + player1 + " de jouer !");
                 //On incrément le nombre de parties jouées
                 h++
-                //On reset les cases
-                $(".caseGo").html("");
                 //On met à jour les scores
                 $("#scores").html("(" + ++scoreP1 + ") " + player1 + " - " + player2 + " (" + scoreP2 + ")");
                 //On annonce le vainqueur
                 $("#winner").html(player1 + " a gagné la manche ! Félicitations !");
                 //On affiche le texte du bouton #contOrReset
                 $("#contOrReset").html("Continuer");
+                //On modifie le titre pour féliciter le joueur et annoncer le prochain tour à jouer
+                $("#player").html("Bravo !<br> A " + player1 + " de jouer !");
             } //Si a est égal à play2 alors player2 gagne
             else if (a == play2) {
                 $('#modalWin').modal('show');
                 i = 0;
                 $("#player").html("A " + player1 + " de jouer !");
                 h++
-                $(".caseGo").html("");
                 $("#scores").html("(" + scoreP1 + ") " + player1 + " - " + player2 + " (" + ++scoreP2 + ")");
                 $("#winner").html(player2 + " a gagné la manche ! Félicitations !");
                 $("#contOrReset").html("Continuer");
+                $("#player").html("Bravo !<br> A " + player1 + " de jouer !");
             }
         }
     } //Si on atteint le nombre de parties demandées
@@ -165,4 +165,8 @@ $("#resetGame").on("click", function () {
 $("#resetGame2").on("click", function () {
     //On raffiche le modal pour récupérer les nouvelles infos
     $('#myModal').modal('show');
+})
+
+$("#contOrReset").on("click", function (){
+    $(".caseGo").html("");
 })
