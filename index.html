@@ -12,35 +12,74 @@
 
 <body>
     <div class="container text-center">
-        <div class="row">
-            <h1 id="player"></h1>
+        <div class="container">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Bienvenue !</h4>
+                        </div>
+                        <div class="modal-body">
+                                <input type="text" class="inputUser" name="player1" placeholder="Nom du joueur 1" id="player_1">
+                                <input type="text" class="inputUser" name="player1" placeholder="Nom du joueur 2" id="player_2">
+                                <input type="text" class="inputUser nbParties" name="player1" placeholder="Nombre de parties (laisser vide pour infini)"> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal" id="saveInfos">Sauvegarder et lancer !</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-xs-offset-3 col-md-2 col-xs-4 caseGo" id="00"></div>
-            <div class="col-md-2 col-xs-4 caseGo" id="01"></div>
-            <div class="col-md-2 col-xs-4 caseGo" id="02"></div>
+        <div class="container">
+            <div class="modal fade" id="modalWin" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Bravo !</h4>
+                        </div>
+                        <div class="modal-body" id="winner"></div>
+                        <div class="modal-footer bg-success" id="footWin">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" id="contOrReset">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-xs-offset-3 col-md-2 col-xs-4 caseGo" id="10"></div>
-            <div class="col-md-2 col-xs-4 caseGo" id="11"></div>
-            <div class="col-md-2 col-xs-4 caseGo" id="12"></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-offset-3 col-md-2 col-xs-4 caseGo" id="20"></div>
-            <div class="col-md-2 col-xs-4 caseGo" id="21"></div>
-            <div class="col-md-2 col-xs-4 caseGo" id="22"></div>
-        </div>
-        <div class="row">
-            <button type="button" id="resetGame">Bloqué ? On reset ici ! (Mais avec les mêmes paramètres !)</button>
-        </div>
-        <div class="row">
-            <button type="button" id="resetGame2">Bloqué ? On reset ici ! (Mais sans les mêmes paramètres !)</button>
-        </div>
-        <div class="row">
-            <h3 id="scores"></h3>
-        </div>
+
+
+    <h1 id="player">Bienvenue !</h1>
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-md-2 col-xs-4 caseGo" id="00"></div>
+        <div class="col-md-2 col-xs-4 caseGo" id="01"></div>
+        <div class="col-md-2 col-xs-4 caseGo" id="02"></div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div class="row">
+        <div class="col-sm-offset-3 col-md-2 col-xs-4 caseGo" id="10"></div>
+        <div class="col-md-2 col-xs-4 caseGo" id="11"></div>
+        <div class="col-md-2 col-xs-4 caseGo" id="12"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-md-2 col-xs-4 caseGo" id="20"></div>
+        <div class="col-md-2 col-xs-4 caseGo" id="21"></div>
+        <div class="col-md-2 col-xs-4 caseGo" id="22"></div>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-info btn-lg" id="resetGame">On reset ici ! (Avec les mêmes paramètres !)</button>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Une envie de tout reset ?</button>
+    </div>
+    <div class="row">
+        <h3 id="scores"></h3>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
 </body>
 

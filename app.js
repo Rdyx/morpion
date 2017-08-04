@@ -1,7 +1,14 @@
-//On initialise le nom des joueuers ainsi que le nombre de parties qu'on veut jouer et le score
-var player1 = prompt("Nom du joueur 1");
-var player2 = prompt("Nom du joueur2");
-var nbParties = prompt("Combien de parties souhaitez-vous jouer ? (Laissez vide pour jouer indéfiniment)");
+//On charge le modal au lancement de la page
+$(window).on('load', function () {
+    $('#myModal').modal('show');
+});
+
+//On initialise le nom des joueuers ainsi que le nombre de parties qu'on veut jouer et le score en cliquant sur #saveInfos
+var player1 = "";
+var player2 = "";
+var nbParties = 0;
+//Au clic sur #saveInfos (dans le modal), on injecte les nouvelles valeurs des var correspondantes
+
 var scoreP1 = 0;
 var scoreP2 = 0;
 //On défini ce qui va apparaître dans les cases
@@ -17,10 +24,9 @@ function parties() {
 //On call la fonction
 parties();
 
-//On met le nom du joueur qui commence
-$("#player").html(player1);
+
 //On affiche les noms et les scores
-$("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+// $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
 
 
 
@@ -35,6 +41,8 @@ function verif(a, b, c) {
         if (a == b && a == c) {
             //Si a est égal à play1 alors player1 gagne
             if (a == play1) {
+                //On affiche le modal
+                $('#modalWin').modal('show');
                 //On reset le nombre de coups
                 i = 0;
                 //On incrément le nombre de parties jouées
@@ -44,37 +52,37 @@ function verif(a, b, c) {
                 //On met à jour les scores
                 $("#scores").html(++scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
                 //On annonce le vainqueur
-                alert(player1 + " a gagné !")
+                $("#winner").html(player1 + " a gagné la manche ! Félicitations !");
+                //On affiche le texte du bouton #contOrReset
+                $("#contOrReset").html("Continuer");
             } //Si a est égal à play2 alors player2 gagne
             else if (a == play2) {
+                $('#modalWin').modal('show');
                 i = 0;
                 h++
-                alert(player2 + " a gagné !");
                 $(".caseGo").html("");
                 $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + ++scoreP2);
+                $("#winner").html(player2 + " a gagné la manche ! Félicitations !");
+                $("#contOrReset").html("Continuer");
             }
         }
     } //Si on atteint le nombre de parties demandées
     else if (h == nbParties) {
+        //On affiche le modal
+        $('#modalWin').modal('show');
         //Si joueur 1 a un meilleur score
         if (scoreP1 > scoreP2) {
-            //On annonce le gagnant et son score
-            alert(player1 + " gagne la partie avec un score de " + scoreP1 + " ! Vous reprendrez bien un p'tit coup ?");
-            //On demande le nombre de parties qu'on veut rejouer
-            nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-            //On relance la function pour être sûr d'avoir un chiffre
-            parties();
+            //On annonce le gagnant et son score et on demande combien de parties ils veulent faire en récupérant la valeur de l'input #nbParties
+            $("#winner").append('<p>' + player1 + ' gagne la partie avec un score de ' + scoreP1 + ' !<br> Vous reprendrez bien un p\'tit coup ?</p>');
         } //Si joueur 2 a un meilleur score
         else if (scoreP1 < scoreP2) {
-            alert(player2 + " gagne la partie avec un score de " + scoreP2 + " ! Un p'tit whisky pour fêter ça ?");
-            nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-            parties();
+            $("#winner").append('<p>' + player2 + ' gagne la partie avec un score de ' + scoreP2 + ' !<br> Un p\'tit whisky pour fêter ça ?</p>');
         } //Si joueur 1 et joueur 2 on le même score
         else if (scoreP1 == scoreP2) {
-            alert("Demn ! " + player1 + " et " + player2 + " n'ont pas réussi à être départagés ! Allez, cul sec pour chacun !");
-            nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-            parties();
+            $("#winner").append('<p>Demn ! ' + player1 + ' et ' + player2 + ' n\'ont pas réussi à être départagés !<br> Allez, cul sec pour chacun !</p>');
         }
+        //On change le texte du bouton
+        $("#contOrReset").html("Rejouer");
         //Reset des cases
         $(".caseGo").html("");
         //reset le compteur de parties, compteur de coups et scores
@@ -89,6 +97,7 @@ function verif(a, b, c) {
 var i = 0;
 //Et on incrémente "i" à chaque clique dans une case en se servant du modulo pour savoir qui doit jouer (tour pair/impair)
 $(".caseGo").on("click", function () {
+    console.log(player1 + player2 + nbParties)
     //On défini si la case est vide et si player1 ou player2 va jouer
     if ($(this).html() == "") {
         //Si i est un chiffre pair, alors player1 joue
@@ -124,7 +133,21 @@ $(".caseGo").on("click", function () {
         //top-right > bottom-left
         || verif($("#02").html(), $("#11").html(), $("#20").html())
         //mid-left > mid-right
-        || verif($("#10").html(), $("#11").html(), $("#12").html());
+        || verif($("#12").html(), $("#11").html(), $("#10").html());
+});
+
+//Lors du clic sur le bouton #saveInfos on reset la grille et on récupère la valeur des inputs
+$("#saveInfos").on("click", function () {
+    $(".caseGo").html("");
+    player1 = $("#player_1").val();
+    player2 = $("#player_2").val();
+    nbParties = parseInt($(".nbParties").val());
+    //On reset compteurs et scores
+    h = i = scoreP1 = scoreP2 = 0;
+    //On lance la fonction partie() au cas où l'utilisateur n'entre rien/du texte pour faire un nb Infinity de parties
+    parties();
+    //Premier affichage des scores + noms des joueurs
+    $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
 });
 
 //Un bouton reset useless pour les feignants 
@@ -135,22 +158,10 @@ $("#resetGame").on("click", function () {
     h = i = scoreP1 = scoreP2 = 0;
     //reset affichage des scores
     $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
-    //Alert JMLP
-    alert("Bah alors ?");
 })
 
 //Un bouton reset pour réinitialiser toutes les données de la partie (équivalent à un reload mais sans recharger la page)
 $("#resetGame2").on("click", function () {
-    $(".caseGo").html("");
-    //reset le compteur de parties, compteur de coups et scores
-    h = i = scoreP1 = scoreP2 = 0;
-    //On redemande les noms des joueurs et le nombre de parties qu'on souhaite jouer
-    player1 = prompt("Nom du joueur 1");
-    player2 = prompt("Nom du joueur2");
-    alert("Bah alors ? On s'enjaille !");
-    nbParties = prompt("Combien de parties souhaitez-vous jouer ?");
-    //On relance la function pour être sûrs d'avoir un chiffre
-    parties();
-    //On reset les scores
-    $("#scores").html(scoreP1 + " " + player1 + " - " + player2 + " " + scoreP2);
+    //On raffiche le modal pour récupérer les nouvelles infos
+    $('#myModal').modal('show');
 })
