@@ -100,12 +100,12 @@ $(".caseGo").on("click", function () {
         //Si i est un chiffre pair, alors player1 joue
         if (i % 2 === 0) {
             //On affiche le pseudo du joueur
-            $("#player").html("A " + player1 + " de jouer !");
+            $("#player").html("A " + player2 + " de jouer !");
             //On injecte la valeur de play1 dans la case (de classe .caseGo)
             $(this).html(play1);
         } //Si i est un chiffre impair, alors player2 joue
         else {
-            $("#player").html("A " + player2 + " de jouer !");
+            $("#player").html("A " + player1 + " de jouer !");
             $(this).html(play2);
         };
         //On incrément le nombre de coups à chaque clique sur une case
