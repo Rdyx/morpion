@@ -12,8 +12,8 @@ var nbParties = 0;
 var scoreP1 = 0;
 var scoreP2 = 0;
 //On défini ce qui va apparaître dans les cases
-var play1 = '<img src="x.png" alt="x">';
-var play2 = '<img src="o.png" alt="o">';
+var play1 = '<img src="http://rawgit.com/Rdyx/morpion/master/x.png" alt="x">';
+var play2 = '<img src="http://rawgit.com/Rdyx/morpion/master/o.png" alt="o">';
 
 //On fait une fonction qui boucle tant que l'utilisateur n'a pas entré un chiffre dans nbParties
 function parties() {
